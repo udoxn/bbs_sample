@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>掲示板 サンプル</title>
+    <link rel="stylesheet" href="public/css/style.css">
+</head>
+<body>
+    <div class="root">
+        <header class="header">
+            <h1 class="header-title">掲示板 サンプル</h1>
+            <p><a href="/">ホームへ戻る</a></p>
+        </header>
+        <main class="main">
+            <article>
+                <h2 id="thread-title"><%= thread["title"] %></h2>
+                <section class="reply">
+                    <div>
+                        <span class="reply-number">1</span>
+                        <span class="reply-name">
+                            <%= h(thread['name']) %>
+                        </span>
+                        <span class="reply-datetime">
+                            <%= h(Time.parse(thread['datetime']).strftime('%Y/%m/%d %H:%M')) %>
+                        </span>
+                        <div class="reply-content">
+                            <%= h(thread['content']).gsub("\n", "<br />") %>
+                        </div>
+                    </div>
+                </section>
+                <% replys.each do |reply| %>
+                <section class="reply">
+                    <div>
+                        <span class="reply-number">
+                            <%= h(reply['reply_number']) %>
+                        </span>
+                        <span class="reply-name">
+                            <%= h(reply['name']) %>
+                        </span>
+                        <span class="reply-datetime">
+                            <%= h(Time.parse(reply['datetime']).strftime('%Y/%m/%d %H:%M')) %>
+                        </span>
+                        <div class="reply-content">
+                            <%= h(reply['content']).gsub("\n", "<br />") %>
+                        </div>
+                    </div>
+                </section>
+                <% end %>
+            </article>
+            <section id="reply-form">
+                <div>
+                    <form action="/post_reply" method="post" id="post-form">
+                        <input type="hidden" name="thread_id" value="<%= thread['id'] %>">
+                        <div style="width: 80%;height: 200px;">
+                            <input type="text" name="name" id="post-form-input-for-reply" placeholder="名前">
+                            <textarea name="content" id="post-form-content-for-reply" placeholder="本文"></textarea>
+                        </div>
+                        <div style="width: 20%;"><input type="submit" id="post-form-btn" value="送信"></div>
+                    </form>
+                </div>
+            </section>
+            <div style="width: 100%;height: 220px;"></div>
+        </main>
+    </div>
+</body>
+</html>

@@ -1,0 +1,19 @@
+GEM
+  remote: https://rubygems.org/
+  specs:
+    cgi (0.4.1)
+    erb (4.0.4)
+      cgi (>= 0.3.3)
+    sqlite3 (2.5.0-x64-mingw-ucrt)
+    webrick (1.9.1)
+
+PLATFORMS
+  x64-mingw-ucrt
+
+DEPENDENCIES
+  erb
+  sqlite3
+  webrick
+
+BUNDLED WITH
+   2.6.2

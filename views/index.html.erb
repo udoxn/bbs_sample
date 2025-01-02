@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>掲示板 サンプル</title>
+    <link rel="stylesheet" href="public/css/style.css">
+</head>
+<body>
+    <div class="root">
+        <header class="header">
+            <h1 class="header-title">掲示板 サンプル</h1>
+        </header>
+        <main class="main">
+            <section class="sections">
+                <h2>スレッド一覧 (新着10件)</h2>
+                <% threads.each do |thread| %>
+                <div class="thread">
+                    <a href="/view?id=<%= h(thread['id']) %>" class="thread-link">
+                        <div class="thread-content">
+                            <span class="thread-title">
+                                <%= h(thread['title']) %>
+                            </span>
+                            <span class="thread-datetime">
+                                <%= h(Time.parse(thread['datetime']).strftime('%Y/%m/%d %H:%M')) %>
+                            </span>
+                        </div>
+                    </a>
+                </div>
+                <% end %>
+            </section>
+            <section id="create-thread">
+                <h2 style="padding-left: 10px;">スレッドを立てる</h2>
+                <div>
+                    <form action="/create_thread" method="post" id="post-form">
+                        <div id="post-form-title-and-name">
+                            <p><input type="text" name="title" class="post-form-input" placeholder="タイトル"></p>
+                            <p><input type="text" name="name" class="post-form-input" placeholder="名前"></p>
+                        </div>
+                        <div style="width: 60%;height: 200px;"><textarea name="content" id="post-form-content" placeholder="本文"></textarea></div>
+                        <div style="width: 20%;"><input type="submit" id="post-form-btn" value="送信"></div>
+                    </form>
+                </div>
+            </section>
+            <div style="width: 100%;height: 220px;"></div>
+        </main>
+    </div>
+</body>
+</html>
