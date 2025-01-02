@@ -1,10 +1,10 @@
 require 'webrick'
 
 # servletを読み込み
-require_relative './models/index_servlet'
-require_relative './models/create_thread.servlet.rb'
-require_relative './models/error.servlet.rb'
-require_relative './models/view.servlet.rb'
+require_relative './models/index.servlet'
+require_relative './models/create_thread.servlet'
+require_relative './models/error.servlet'
+require_relative './models/view.servlet'
 require_relative './models/post_reply.servlet'
 
 # サーバーの設定
