@@ -6,6 +6,7 @@ require_relative './models/create_thread.servlet'
 require_relative './models/error.servlet'
 require_relative './models/view.servlet'
 require_relative './models/post_reply.servlet'
+require_relative './models/search.servlet'
 
 # サーバーの設定
 port = 8080
@@ -22,6 +23,7 @@ server.mount '/create_thread', CreateThreadServlet
 server.mount '/error', ErrorServlet
 server.mount '/view', ViewServlet
 server.mount '/post_reply', PostReplyServlet
+server.mount '/search', SearchServlet
 
 # Ctrl+Cでサーバーを停止する
 trap('INT') { server.shutdown }

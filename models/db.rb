@@ -36,6 +36,14 @@ class DB
         false
     end
 
+    # threadsの特定のtitleを含む列をすべて取得する
+    def fetch_threads_by_title(q)
+        @db.execute("SELECT * FROM threads WHERE title LIKE ?", ["%#{q}%"])
+    rescue => e
+        puts "Error fetching threads by title: #{e.message}"
+        false
+    end
+
     # replysの特定のthread_idの中で,最大の数字のreply_numberを取得する
     def fetch_max_reply_number(thread_id)
         result = @db.execute("SELECT MAX(datetime), reply_number FROM replys WHERE thread_id = ?", [thread_id.to_i])
