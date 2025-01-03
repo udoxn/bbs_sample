@@ -52,7 +52,7 @@ class DB
         if !(result[0]['reply_number'] == nil)
             result[0]['reply_number']
         else
-            0
+            1
         end
     rescue => e
         puts "Error fetching max reply number: #{e.message}"

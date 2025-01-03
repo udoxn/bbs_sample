@@ -24,6 +24,9 @@
             <br>
             <section class="sections">
                 <h2>スレッド一覧 (新着10件)</h2>
+                <% if threads.length == 0 %>
+                <p>スレッドはまだありません</p>
+                <% end %>
                 <% threads.each do |thread| %>
                 <div class="thread">
                     <a href="/view?id=<%= h(thread['id']) %>" class="thread-link">
@@ -40,11 +43,11 @@
                 <% end %>
             </section>
             <section id="create-thread">
-                <h2 style="padding-left: 10px;">スレッドを立てる</h2>
+                <h2>スレッドを立てる</h2>
                 <div>
                     <form action="/create_thread" method="post" style="width: 300px;">
                         <p><input type="text" name="title" placeholder="タイトル" class="form-input"></p>
-                        <p><input type="text" name="name" placeholder="名前" class="form-input"></p>
+                        <p><input type="text" name="name" placeholder="名前" class="form-input" value="匿名希望くん"></p>
                         <p><textarea name="content" placeholder="本文" style="resize: none;"></textarea></p>
                         <p><input type="submit" value="送信"></p>
                     </form>

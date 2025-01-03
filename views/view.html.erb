@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="ja">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,6 +8,7 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/water.css@2/out/water.css">
     <link rel="stylesheet" href="public/css/style.css">
 </head>
+
 <body>
     <div class="root">
         <header class="header">
@@ -15,53 +17,74 @@
         </header>
         <main class="main">
             <article>
-                <h2 id="thread-title"><%= thread["title"] %></h2>
-                <section class="reply">
+                <h2 id="thread-title">
+                    <%= thread["title"] %>
+                </h2>
+                <section class="reply" id="reply-1">
                     <div>
-                        <span class="reply-number">1</span>
-                        <span class="reply-name">
-                            <%= h(thread['name']) %>
-                        </span>
-                        <span class="reply-datetime">
-                            <%= h(Time.parse(thread['datetime']).strftime('%Y/%m/%d %H:%M')) %>
-                        </span>
+                        <div class="reply-header">
+                            <span class="reply-number">1</span>
+                            <span class="reply-name">
+                                <%= h(thread['name']) %>
+                            </span>
+                            <span class="reply-datetime">
+                                <%= h(Time.parse(thread['datetime']).strftime('%Y/%m/%d %H:%M')) %>
+                            </span>
+                            <span class="reply-btn" onclick="reply_form_focus(1)">返信する</span>
+                        </div>
                         <div class="reply-content">
-                            <%= h(thread['content']).gsub("\n", "<br />") %>
+                            <%= replace_reply_links(h(thread['content'])).gsub("\n", "<br />" ) %>
                         </div>
                     </div>
                 </section>
                 <% replys.each do |reply| %>
-                <section class="reply">
-                    <div>
-                        <span class="reply-number">
-                            <%= h(reply['reply_number']) %>
-                        </span>
-                        <span class="reply-name">
-                            <%= h(reply['name']) %>
-                        </span>
-                        <span class="reply-datetime">
-                            <%= h(Time.parse(reply['datetime']).strftime('%Y/%m/%d %H:%M')) %>
-                        </span>
-                        <div class="reply-content">
-                            <%= h(reply['content']).gsub("\n", "<br />") %>
+                    <section class="reply" id="reply-<%= reply['reply_number'] %>">
+                        <div>
+                            <div class="reply-header">
+                                <span class="reply-number">
+                                    <%= h(reply['reply_number']) %>
+                                </span>
+                                <span class="reply-name">
+                                    <%= h(reply['name']) %>
+                                </span>
+                                <span class="reply-datetime">
+                                    <%= h(Time.parse(reply['datetime']).strftime('%Y/%m/%d %H:%M')) %>
+                                </span>
+                                <span class="reply-btn"
+                                    onclick="reply_form_focus(<%= reply['reply_number'].to_i %>)">返信する</span>
+                            </div>
+                            <div class="reply-content">
+                                <%= replace_reply_links((reply['content'])).gsub("\n", "<br />" ) %>
+                            </div>
                         </div>
-                    </div>
-                </section>
-                <% end %>
+                    </section>
+                    <% end %>
             </article>
             <section id="reply-form">
                 <h3>返信する</h3>
                 <div>
-                    <form action="/post_reply" method="post" style="width: 300px;margin-top: 20px;" id="#reply-form">
+                    <form action="/post_reply" method="post" style="width: 300px;margin-top: 20px;" id="reply-form">
                         <p><input type="hidden" name="thread_id" value="<%= thread['id'] %>"></p>
-                        <p><input type="text" name="name" placeholder="名前" class="form-input"></p>
-                        <p><textarea name="content" placeholder="本文" style="resize: none;"></textarea></p>
+                        <p><input type="text" name="name" placeholder="名前" class="form-input" value="匿名希望くん"></p>
+                        <p><textarea name="content" placeholder="本文" style="resize: none;" id="reply-form-textarea"
+                                tabindex="0"></textarea></p>
                         <p><input type="submit" value="送信"></p>
                     </form>
                 </div>
             </section>
-            <div style="width: 100%;height: 220px;"></div>
         </main>
     </div>
+    <script>
+        function reply_form_focus(reply_number) {
+            const form = document.getElementById('reply-form');
+            form.scrollIntoView({
+                behavior: 'smooth'
+            })
+            const textarea = document.getElementById('reply-form-textarea')
+            textarea.value = `>>${reply_number}`
+            textarea.focus()
+        }
+    </script>
 </body>
+
 </html>

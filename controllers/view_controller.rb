@@ -3,6 +3,13 @@ require_relative './database/db_connection'
 require_relative './helpers/render_template'
 require_relative './helpers/escape_html'
 
+def replace_reply_links(text)
+    # 正規表現で ">>数字" を検出し、リンクタグに置き換える
+    text.gsub(/>>(\d+)/) do |match|
+      "<a href='#reply-#{$1}'>>>#{$1}</a>"
+    end
+end
+
 class ViewServlet < WEBrick::HTTPServlet::AbstractServlet
     def do_GET(req, res)
         # idがなければホームにリダイレクト
