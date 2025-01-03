@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>掲示板 サンプル</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/water.css@2/out/water.css">
     <link rel="stylesheet" href="public/css/style.css">
 </head>
 <body>
@@ -49,14 +50,13 @@
                 <% end %>
             </article>
             <section id="reply-form">
+                <h3>返信する</h3>
                 <div>
-                    <form action="/post_reply" method="post" id="post-form">
-                        <input type="hidden" name="thread_id" value="<%= thread['id'] %>">
-                        <div style="width: 80%;height: 200px;">
-                            <input type="text" name="name" id="post-form-input-for-reply" placeholder="名前">
-                            <textarea name="content" id="post-form-content-for-reply" placeholder="本文"></textarea>
-                        </div>
-                        <div style="width: 20%;"><input type="submit" id="post-form-btn" value="送信"></div>
+                    <form action="/post_reply" method="post" style="width: 300px;margin-top: 20px;" id="#reply-form">
+                        <p><input type="hidden" name="thread_id" value="<%= thread['id'] %>"></p>
+                        <p><input type="text" name="name" placeholder="名前" class="form-input"></p>
+                        <p><textarea name="content" placeholder="本文" style="resize: none;"></textarea></p>
+                        <p><input type="submit" value="送信"></p>
                     </form>
                 </div>
             </section>

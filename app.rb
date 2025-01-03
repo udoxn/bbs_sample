@@ -8,8 +8,9 @@ require_relative './models/view.servlet'
 require_relative './models/post_reply.servlet'
 
 # サーバーの設定
+port = 8080
 server = WEBrick::HTTPServer.new(
-    Port: 8080,                # ポート番号
+    Port: port,                # ポート番号
 )
 
 # 静的ファイルを配信するための設定
@@ -25,6 +26,6 @@ server.mount '/post_reply', PostReplyServlet
 # Ctrl+Cでサーバーを停止する
 trap('INT') { server.shutdown }
 
-server.start
+puts "http://localhost:#{port}"
 
-puts "http://localhost:8080"
+server.start

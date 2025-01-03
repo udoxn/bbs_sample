@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>掲示板 サンプル</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/water.css@2/out/water.css">
     <link rel="stylesheet" href="public/css/style.css">
 </head>
 <body>
@@ -12,6 +13,15 @@
             <h1 class="header-title">掲示板 サンプル</h1>
         </header>
         <main class="main">
+            <section>
+                <div>
+                    <form action="/search" method="get" style="display: flex;">
+                        <input type="text" name="q" placeholder="タイトル検索">
+                        <input type="submit" value="検索">
+                    </form>
+                </div>
+            </section>
+            <br>
             <section class="sections">
                 <h2>スレッド一覧 (新着10件)</h2>
                 <% threads.each do |thread| %>
@@ -32,17 +42,14 @@
             <section id="create-thread">
                 <h2 style="padding-left: 10px;">スレッドを立てる</h2>
                 <div>
-                    <form action="/create_thread" method="post" id="post-form">
-                        <div id="post-form-title-and-name">
-                            <p><input type="text" name="title" class="post-form-input" placeholder="タイトル"></p>
-                            <p><input type="text" name="name" class="post-form-input" placeholder="名前"></p>
-                        </div>
-                        <div style="width: 60%;height: 200px;"><textarea name="content" id="post-form-content" placeholder="本文"></textarea></div>
-                        <div style="width: 20%;"><input type="submit" id="post-form-btn" value="送信"></div>
+                    <form action="/create_thread" method="post" style="width: 300px;">
+                        <p><input type="text" name="title" placeholder="タイトル" class="form-input"></p>
+                        <p><input type="text" name="name" placeholder="名前" class="form-input"></p>
+                        <p><textarea name="content" placeholder="本文" style="resize: none;"></textarea></p>
+                        <p><input type="submit" value="送信"></p>
                     </form>
                 </div>
             </section>
-            <div style="width: 100%;height: 220px;"></div>
         </main>
     </div>
 </body>
