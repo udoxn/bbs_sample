@@ -44,6 +44,10 @@
     font-size: 20px;
 }
 
+.reply-sum {
+    margin-left: 5px;
+}
+
 .thread-datetime {
     width: fit-content;
     display: block;

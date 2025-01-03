@@ -23,7 +23,7 @@
             </section>
             <br>
             <section class="sections">
-                <h2>スレッド一覧 (新着10件)</h2>
+                <h2>スレッド一覧 (新着20件)</h2>
                 <% if threads.length == 0 %>
                 <p>スレッドはまだありません</p>
                 <% end %>
@@ -33,6 +33,9 @@
                         <div class="thread-content">
                             <span class="thread-title">
                                 <%= h(thread['title']) %>
+                            </span>
+                            <span class="reply-sum">
+                                (<%= thread['max_reply_number'] == 0 ? 1 : thread['max_reply_number'] %>)
                             </span>
                             <span class="thread-datetime">
                                 <%= h(Time.parse(thread['datetime']).strftime('%Y/%m/%d %H:%M')) %>

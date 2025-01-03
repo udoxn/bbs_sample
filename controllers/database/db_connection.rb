@@ -22,7 +22,25 @@ class DB
 
     # threadsから新しい順10件を取得する
     def fetch_latest_threads(limit = 10)
-        @db.execute("SELECT id,title,datetime FROM threads ORDER BY datetime DESC LIMIT ?", [limit])
+        # 最新のスレッドを制限数まで取得し、max_reply_numberを計算して含める
+        @db.execute(<<-SQL, [limit])
+            SELECT 
+                threads.id,
+                threads.title,
+                threads.datetime,
+                COALESCE(MAX(replys.reply_number), 0) AS max_reply_number
+            FROM
+                threads
+            LEFT JOIN
+                replys
+            ON
+                threads.id = replys.thread_id
+            GROUP BY
+                threads.id, threads.title, threads.datetime
+            ORDER BY
+                threads.datetime DESC
+            LIMIT ?
+        SQL
     rescue => e
         puts "Error fetching latest threads: #{e.message}"
         false
