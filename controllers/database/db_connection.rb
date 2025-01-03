@@ -38,7 +38,7 @@ class DB
 
     # threadsの特定のtitleを含む列をすべて取得する
     def fetch_threads_by_title(q)
-        @db.execute("SELECT * FROM threads WHERE title LIKE ?", ["%#{q}%"])
+        @db.execute("SELECT * FROM threads WHERE title LIKE ?", ["%#{q.force_encoding('UTF-8')}%"])
     rescue => e
         puts "Error fetching threads by title: #{e.message}"
         false

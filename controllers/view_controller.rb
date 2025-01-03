@@ -26,11 +26,17 @@ class ViewServlet < WEBrick::HTTPServlet::AbstractServlet
         replys = db.fetch_replys_by_thread_id(id)
         db.close
 
-        res.status = 200
-        res['Content-Type'] = 'text/html'
-        res.body = render_template('view', {
-            thread: thread[0],
-            replys: replys
-        })
+        # スレッドが存在しない場合はリダイレクト
+        if thread.length == 0
+            res.status = 302
+            res['Location'] = '/'
+        else
+            res.status = 200
+            res['Content-Type'] = 'text/html'
+            res.body = render_template('view', {
+                thread: thread[0],
+                replys: replys
+            })
+        end
     end
 end
