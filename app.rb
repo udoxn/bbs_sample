@@ -8,26 +8,39 @@ require_relative './controllers/post_thread_controller'
 require_relative './controllers/post_reply_controller'
 require_relative './controllers/error_controller'
 
-# サーバーの設定
-port = 8080
-server = WEBrick::HTTPServer.new(
-    Port: port,                # ポート番号
-)
+# データベースが存在しない場合はテーブルと一緒に作成
+require_relative './controllers/database/create_table'
+dbname = 'bbs.db'
+error = false
+if !(File.exist?(dbname))
+    if create_table()
+        puts "データベースを作成しました"
+    else
+        error = true
+        puts "データベースの作成に失敗しました"
+    end
+end
 
-# 静的ファイルを配信するための設定
-server.mount('/public', WEBrick::HTTPServlet::FileHandler, File.join(__dir__, 'public'))
+if !(error)
+    # サーバーの設定
+    port = 8080
+    server = WEBrick::HTTPServer.new(Port: port)
 
-# ルーティング
-server.mount '/', IndexServlet
-server.mount '/create_thread', CreateThreadServlet
-server.mount '/error', ErrorServlet
-server.mount '/view', ViewServlet
-server.mount '/post_reply', PostReplyServlet
-server.mount '/search', SearchServlet
+    # 静的ファイルを配信するための設定
+    server.mount('/public', WEBrick::HTTPServlet::FileHandler, File.join(__dir__, 'public'))
 
-# Ctrl+Cでサーバーを停止する
-trap('INT') { server.shutdown }
+    # ルーティング
+    server.mount '/', IndexServlet
+    server.mount '/create_thread', CreateThreadServlet
+    server.mount '/error', ErrorServlet
+    server.mount '/view', ViewServlet
+    server.mount '/post_reply', PostReplyServlet
+    server.mount '/search', SearchServlet
 
-puts "http://localhost:#{port}"
+    # Ctrl+Cでサーバーを停止する
+    trap('INT') { server.shutdown }
 
-server.start
+    puts "http://localhost:#{port}"
+
+    server.start
+end

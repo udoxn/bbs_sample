@@ -16,7 +16,6 @@
    ```bash
    cd bbs_sample              # プロジェクトディレクトリに移動
    bundle install             # 依存ライブラリのインストール
-   bundle exec ruby ./controllers/database/create_table.rb  # SQLiteテーブルの作成
    bundle exec ruby app.rb    # アプリの起動
    ```
 
