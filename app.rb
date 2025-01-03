@@ -1,4 +1,5 @@
 require 'webrick'
+require 'dotenv/load'
 
 # servletを読み込み
 require_relative './controllers/index_controller'
@@ -10,7 +11,7 @@ require_relative './controllers/error_controller'
 
 # データベースが存在しない場合はテーブルと一緒に作成
 require_relative './controllers/database/create_table'
-dbname = 'bbs.db'
+dbname = ENV['SQLITE3_DATABASE_FILE']
 error = false
 if !(File.exist?(dbname))
     if create_table()

@@ -2,6 +2,7 @@ GEM
   remote: https://rubygems.org/
   specs:
     cgi (0.4.1)
+    dotenv (3.1.7)
     erb (4.0.4)
       cgi (>= 0.3.3)
     sqlite3 (2.5.0-x64-mingw-ucrt)
@@ -11,6 +12,7 @@ PLATFORMS
   x64-mingw-ucrt
 
 DEPENDENCIES
+  dotenv
   erb
   sqlite3
   webrick

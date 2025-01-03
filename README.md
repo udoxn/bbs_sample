@@ -1,7 +1,7 @@
-# bbs_sample
+# bbs_sample remix
 
 ## 概要
-`bbs_sample` は、RubyとWEBrickを使用した簡易的なWebアプリです。
+`bbs_sample remix` は、RubyとWEBrickを使用した簡易的なWebアプリです。
 
 ## 使用している言語やライブラリ
 - **Ruby**: 3.4.1
@@ -24,4 +24,3 @@
 ## 注意
 - **SQLite3**: 本アプリはSQLite3をデータベースとして使用しています。SQLite3がシステムにインストールされていることを確認してください。
 - **Port**: デフォルトでは `8080` 番ポートを使用しています。これを変更する場合は `app.rb` 内の設定を編集してください。
-

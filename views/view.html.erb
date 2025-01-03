@@ -54,7 +54,7 @@
                                     onclick="reply_form_focus(<%= reply['reply_number'].to_i %>)">返信する</span>
                             </div>
                             <div class="reply-content">
-                                <%= replace_reply_links((reply['content'])).gsub("\n", "<br />" ) %>
+                                <%= replace_reply_links(h(reply['content'])).gsub("\n", "<br />" ) %>
                             </div>
                         </div>
                     </section>
