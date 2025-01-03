@@ -3,4 +3,3 @@ source 'https://rubygems.org'
 gem 'webrick'
 gem "erb"
 gem 'sqlite3'
-gem 'dotenv'

@@ -9,11 +9,24 @@ require_relative './controllers/post_thread_controller'
 require_relative './controllers/post_reply_controller'
 require_relative './controllers/error_controller'
 
-# サーバーの設定
-port = 8080
-server = WEBrick::HTTPServer.new(
-    Port: port,                # ポート番号
-)
+
+# データベースが存在しない場合はテーブルと一緒に作成
+require_relative './controllers/database/create_table'
+dbname = ENV['SQLITE3_DATABASE_FILE']
+error = false
+if !(File.exist?(dbname))
+    if create_table()
+        puts "データベースを作成しました"
+    else
+        error = true
+        puts "データベースの作成に失敗しました"
+    end
+end
+
+if !(error)
+    # サーバーの設定
+    port = 8080
+    server = WEBrick::HTTPServer.new(Port: port)
 
     # 静的ファイルを配信するための設定
     server.mount('/public', WEBrick::HTTPServlet::FileHandler, File.join(__dir__, 'public'))
