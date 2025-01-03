@@ -1,8 +1,8 @@
 require 'webrick'
-require_relative 'render_template'
-require_relative 'db'
-require_relative 'escape_html'
-require_relative 'valid_request.rb'
+require_relative './database/db_connection'
+require_relative './helpers/escape_html'
+require_relative './helpers/render_template'
+require_relative './helpers/valid_request'
 
 class SearchServlet < WEBrick::HTTPServlet::AbstractServlet
     def do_GET(req, res)

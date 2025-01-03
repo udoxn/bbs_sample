@@ -1,6 +1,6 @@
 require 'webrick'
-require_relative 'render_template'
-require_relative 'valid_request'
+require_relative './helpers/render_template'
+require_relative './helpers/valid_request'
 
 class ErrorServlet < WEBrick::HTTPServlet::AbstractServlet
     def do_GET(req, res)

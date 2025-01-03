@@ -1,12 +1,12 @@
 require 'webrick'
 
 # servletを読み込み
-require_relative './models/index.servlet'
-require_relative './models/create_thread.servlet'
-require_relative './models/error.servlet'
-require_relative './models/view.servlet'
-require_relative './models/post_reply.servlet'
-require_relative './models/search.servlet'
+require_relative './controllers/index_controller'
+require_relative './controllers/view_controller'
+require_relative './controllers/search_controller'
+require_relative './controllers/post_thread_controller'
+require_relative './controllers/post_reply_controller'
+require_relative './controllers/error_controller'
 
 # サーバーの設定
 port = 8080
