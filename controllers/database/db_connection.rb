@@ -1,4 +1,5 @@
 require 'sqlite3'
+require 'dotenv/load'
 
 class DB
     def initialize(db_name)
@@ -12,10 +13,10 @@ class DB
 
     # threadsにname, title, contentをインサートする
     def insert_thread(name, title, content)
-        # ユニコードをUTF-8に変換
-        name = name.force_encoding('UTF-8')
-        title = title.force_encoding('UTF-8')
-        content = content.force_encoding('UTF-8')
+        # ユニコードをUTF-8に変換, 文字列を指定の長さまで切り取る
+        name = name.force_encoding('UTF-8')[0, ENV['NAME_MAX_LENGTH'].to_i]
+        title = title.force_encoding('UTF-8')[0, ENV['TITLE_MAX_LENGTH'].to_i]
+        content = content.force_encoding('UTF-8')[0, ENV['CONTENT_MAX_LENGTH'].to_i]
         datetime = Time.now.to_s
 
         @db.execute("INSERT INTO threads (name, title, content, datetime) VALUES (?, ?, ?, ?)", [name, title, content, datetime])
@@ -86,8 +87,8 @@ class DB
     def insert_reply(thread_id, reply_number, name, content)
         thread_id = thread_id.to_i
         reply_number = reply_number.to_i
-        name = name.force_encoding('UTF-8')
-        content = content.force_encoding('UTF-8')
+        name = name.force_encoding('UTF-8')[0, ENV['NAME_MAX_LENGTH'].to_i]
+        content = content.force_encoding('UTF-8')[0, ENV['CONTENT_MAX_LENGTH'].to_i]
 
         @db.execute("INSERT INTO replys (thread_id, reply_number, name, content) VALUES (?, ?, ?, ?)", [thread_id, reply_number, name, content])
         true
