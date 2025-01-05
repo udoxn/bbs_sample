@@ -1,4 +1,5 @@
 require 'webrick'
+require 'dotenv/load'
 require_relative './database/db_connection'
 require_relative './helpers/render'
 require_relative './helpers/escape_html'
@@ -21,7 +22,7 @@ class ViewServlet < WEBrick::HTTPServlet::AbstractServlet
         id = req.query['id']
 
         # スレッド情報とスレッドへのリプライを取得
-        db = DB.new('bbs.db')
+        db = DB.new(ENV['SQLITE3_DATABASE_FILE'])
         thread = db.fetch_threads_by_id(id)
         replys = db.fetch_replys_by_thread_id(id)
         db.close

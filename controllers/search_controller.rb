@@ -1,4 +1,5 @@
 require 'webrick'
+require 'dotenv/load'
 require_relative './database/db_connection'
 require_relative './helpers/escape_html'
 require_relative './helpers/render'
@@ -8,7 +9,7 @@ class SearchServlet < WEBrick::HTTPServlet::AbstractServlet
     def do_GET(req, res)
         # qの存在&空白チェック
         if valid_request?(req.query, %w[q])
-            db = DB.new('bbs.db')
+            db = DB.new(ENV['SQLITE3_DATABASE_FILE'])
             q = req.query['q']
             threads = db.fetch_threads_by_title(q)
             threads_length = threads.length

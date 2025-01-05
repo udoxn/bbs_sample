@@ -1,4 +1,5 @@
 require 'webrick'
+require 'dotenv/load'
 require_relative './database/db_connection'
 require_relative './helpers/valid_request'
 
@@ -13,7 +14,7 @@ class CreateThreadServlet < WEBrick::HTTPServlet::AbstractServlet
             content = "#{req.query['content']}"
 
             # threadsテーブルに書き込む
-            db = DB.new('bbs.db')
+            db = DB.new(ENV['SQLITE3_DATABASE_FILE'])
             if db.insert_thread(name, title, content)
                 # Todo: あとでここに作成したスレッドにリダイレクトするようにLocationを変更するプログラムを追加する
                 puts 'success'

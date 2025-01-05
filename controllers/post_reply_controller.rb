@@ -1,4 +1,5 @@
 require 'webrick'
+require 'dotenv/load'
 require_relative './database/db_connection'
 require_relative './helpers/valid_request'
 
@@ -21,7 +22,7 @@ class PostReplyServlet < WEBrick::HTTPServlet::AbstractServlet
             name = "#{req.query['name']}"
             content = "#{req.query['content']}"
 
-            db = DB.new('bbs.db')
+            db = DB.new(ENV['SQLITE3_DATABASE_FILE'])
             # 指定されたthread_idのthreadが存在するか確認
             thread_exist = (db.fetch_threads_by_id(id).length == 0) ? false : true
             if thread_exist
