@@ -5,14 +5,6 @@
     <div class="root">
 		<%= render('_header', { title: h(ENV['APP_NAME']), return_btn: false }) %>
         <main class="main">
-            <section>
-                <div>
-                    <form action="/search" method="get" style="display: flex;">
-                        <input type="text" name="q" placeholder="タイトル検索">
-                        <input type="submit" value="検索">
-                    </form>
-                </div>
-            </section>
             <section class="sections">
                 <h2>スレッド一覧 (新着20件)</h2>
                 <% if threads.length == 0 %>

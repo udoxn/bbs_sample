@@ -1,4 +1,12 @@
 <header class="header">
-    <h1 class="header-title"><%= title %></h1>
-	<%= return_btn ? '<p><a href="/">ホームへ戻る</a></p>' : '' %>
+    <div style="display: flex; align-items: center;">
+        <h1 style='margin:0;'><%= title %></h1>
+        <div style="margin: 0 0 0 auto;">
+            <form action="/search" method="get" style="display: flex; align-items:center;">
+                <input type="text" name="q" placeholder="タイトル検索" style="margin:0;">
+                <input type="submit" value="検索" style="margin:0 0 0 5px;">
+            </form>
+        </div>
+    </div>
+	<%= return_btn ? '<br /><p><a href="/">>>ホームへ戻る</a></p>' : '' %>
 </header>
