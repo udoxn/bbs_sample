@@ -12,8 +12,13 @@ class DB
 
     # threadsにname, title, contentをインサートする
     def insert_thread(name, title, content)
+        # ユニコードをUTF-8に変換
+        name = name.force_encoding('UTF-8')
+        title = title.force_encoding('UTF-8')
+        content = content.force_encoding('UTF-8')
         datetime = Time.now.to_s
-        @db.execute("INSERT INTO threads (name, title, content, datetime) VALUES (?, ?, ?, ?)", [name.force_encoding('UTF-8'), title.force_encoding('UTF-8'), content.force_encoding('UTF-8'), datetime])
+
+        @db.execute("INSERT INTO threads (name, title, content, datetime) VALUES (?, ?, ?, ?)", [name, title, content, datetime])
         true
     rescue => e
         puts "Error inserting thread: #{e.message}"
@@ -24,7 +29,7 @@ class DB
     def fetch_latest_threads(limit = 10)
         # 最新のスレッドを制限数まで取得し、max_reply_numberを計算して含める
         @db.execute(<<-SQL, [limit])
-            SELECT 
+            SELECT
                 threads.id,
                 threads.title,
                 threads.datetime,
@@ -79,7 +84,12 @@ class DB
 
     # replysにthread_id, reply_number, name, contentをインサートする
     def insert_reply(thread_id, reply_number, name, content)
-        @db.execute("INSERT INTO replys (thread_id, reply_number, name, content) VALUES (?, ?, ?, ?)", [thread_id.to_i, reply_number.to_i, name.force_encoding('UTF-8'), content.force_encoding('UTF-8')])
+        thread_id = thread_id.to_i
+        reply_number = reply_number.to_i
+        name = name.force_encoding('UTF-8')
+        content = content.force_encoding('UTF-8')
+
+        @db.execute("INSERT INTO replys (thread_id, reply_number, name, content) VALUES (?, ?, ?, ?)", [thread_id, reply_number, name, content])
         true
     rescue => e
         puts "Error inserting reply: #{e.message}"

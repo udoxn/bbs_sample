@@ -7,15 +7,6 @@
     <div class="root">
         <%= render('_header', { title: h(ENV['APP_NAME']), return_btn: true }) %>
         <main class="main">
-            <section>
-                <div>
-                    <form action="/search" method="get" style="display: flex;">
-                        <input type="text" name="q" placeholder="タイトル検索" value=<%= h(q) %>>
-                        <input type="submit" value="検索">
-                    </form>
-                </div>
-            </section>
-            <br>
             <section class="sections">
                 <h2>「<%= h(q) %>」の検索結果</h2>
                 <p><%= threads_length > 0 ? "#{threads_length}件のスレッドが見つかりました" : "該当するスレッドは見つかりませんでした" %></p>

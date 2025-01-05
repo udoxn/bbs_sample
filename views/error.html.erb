@@ -1,10 +1,14 @@
 <!DOCTYPE html>
 <html lang="ja">
 <head>
-<%= render('_head', { title: 'エラー' }) %>
+<%= render('_head', { title: h(ENV['APP_NAME']) }) %>
 </head>
 <body>
-	<%= render('_header', { title: 'エラー'), return_btn: true }) %>
-    <p><b><%= error_message[type] %></b></p>
+    <div class="root">
+        <%= render('_header', { title: h(ENV['APP_NAME']), return_btn: true }) %>
+        <main class="main">
+            <p><b style="color: red;"><%= error_message[type] %></b></p>
+        </main>
+    </div>
 </body>
 </html>
