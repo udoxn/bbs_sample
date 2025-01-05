@@ -1,8 +1,8 @@
 <header class="header">
-    <div style="display: flex; align-items: center;">
-        <h1 style='margin:0;'><%= title %></h1>
-        <div style="margin: 0 0 0 auto;">
-            <form action="/search" method="get" style="display: flex; align-items:center;">
+    <div class="header-content">
+        <h1><%= title %></h1>
+        <div class="header-search-form-div">
+            <form action="/search" method="get" class="header-search-form">
                 <input type="text" name="q" placeholder="タイトル検索" style="margin:0;">
                 <input type="submit" value="検索" style="margin:0 0 0 5px;">
             </form>

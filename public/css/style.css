@@ -8,6 +8,24 @@
     padding-bottom: 0;
 }
 
+.header-content {
+    display: flex;
+    align-items: center;
+}
+
+.header-content h1 {
+    margin: 0;
+}
+
+.header-search-form-div {
+    margin: 0 0 0 auto;
+}
+
+.header-search-form {
+    display: flex;
+    align-items: center;
+}
+
 .header-nav ol {
     list-style-type: none;
     padding-left: 0;
@@ -53,6 +71,8 @@
 }
 
 .thread-title {
+    display: inline-block;
+    width: 80%;
     font-size: 20px;
 }
 
@@ -109,4 +129,28 @@
 .reply-btn:hover {
     cursor: pointer;
     text-decoration: underline;
+}
+
+@media screen and (max-width: 480px) {
+    .header-content {
+        display: block;
+        text-align: center;
+    }
+
+    .header-search-form {
+        justify-content: center;
+        margin: 5px 0;
+    }
+
+    .header-nav ol {
+        justify-content: center;
+    }
+
+    .thread-content {
+        display: block;
+    }
+
+    .thread-title {
+        width: 100%;
+    }
 }
