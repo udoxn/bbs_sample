@@ -1,7 +1,7 @@
-# bbs_sample remix
+# bbs_sample
 
 ## 概要
-`bbs_sample remix` は、RubyとWEBrickを使用した簡易的なWebアプリです。
+`bbs_sample` は、RubyとWEBrickを使用した簡易的なWebアプリです。
 
 ## 使用している言語やライブラリ
 - **Ruby**: 3.4.1
