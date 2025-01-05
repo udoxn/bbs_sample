@@ -1,9 +1,9 @@
 <!DOCTYPE html>
 <html lang="ja">
-<%= render('_head', { title: h(ENV['APP_NAME']) }) %>
+<%= render('_head', { title: ENV['APP_NAME'] }) %>
 <body>
     <div class="root">
-		<%= render('_header', { title: h(ENV['APP_NAME']), return_btn: false }) %>
+		<%= render('_header', { title: ENV['APP_NAME'] }) %>
         <main class="main">
             <section class="sections">
                 <h2>スレッド一覧 (新着20件)</h2>

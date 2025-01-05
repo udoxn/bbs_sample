@@ -1,11 +1,11 @@
 <!DOCTYPE html>
 <html lang="ja">
 <head>
-<%= render('_head', { title: h(ENV['APP_NAME']) }) %>
+<%= render('_head', { title: ENV['APP_NAME'] }) %>
 </head>
 <body>
     <div class="root">
-        <%= render('_header', { title: h(ENV['APP_NAME']), return_btn: true }) %>
+        <%= render('_header', { title: ENV['APP_NAME'] }) %>
         <main class="main">
             <section class="sections">
                 <h2>「<%= h(q) %>」の検索結果</h2>
