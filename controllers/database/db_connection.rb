@@ -62,7 +62,26 @@ class DB
 
     # threadsの特定のtitleを含む列をすべて取得する
     def fetch_threads_by_title(q)
-        @db.execute("SELECT * FROM threads WHERE title LIKE ?", ["%#{q.force_encoding('UTF-8')}%"])
+        @db.execute(<<-SQL, ["%#{q.force_encoding('UTF-8')}%"])
+            SELECT
+                threads.id,
+                threads.title,
+                threads.datetime,
+                COALESCE(MAX(replys.reply_number), 0) AS max_reply_number
+            FROM
+                threads
+            LEFT JOIN
+                replys
+            ON
+                threads.id = replys.thread_id
+            WHERE threads.title
+            LIKE ?
+            GROUP BY
+                threads.id, threads.title, threads.datetime
+            ORDER BY
+                threads.datetime DESC
+            LIMIT 50
+        SQL
     rescue => e
         puts "Error fetching threads by title: #{e.message}"
         false

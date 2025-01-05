@@ -32,9 +32,9 @@
                 <h2>スレッドを立てる</h2>
                 <div>
                     <form action="/create_thread" method="post" style="width: 300px;">
-                        <p><input type="text" name="title" placeholder="タイトル" class="form-input"></p>
-                        <p><input type="text" name="name" placeholder="名前" class="form-input" value="匿名希望くん"></p>
-                        <p><textarea name="content" placeholder="本文" style="resize: none;"></textarea></p>
+                        <p><input type="text" name="title" placeholder="タイトル" class="form-input" maxlength="<%= ENV['TITLE_MAX_LENGTH'] %>" required></p>
+                        <p><input type="text" name="name" placeholder="名前" class="form-input" value="匿名希望くん" maxlength="<%= ENV['NAME_MAX_LENGTH'] %>" required></p>
+                        <p><textarea name="content" placeholder="本文" maxlength="<%= ENV['CONTENT_MAX_LENGTH'] %>" style="resize: none;" required></textarea></p>
                         <p><input type="submit" value="送信"></p>
                     </form>
                 </div>

@@ -54,9 +54,8 @@
                 <div>
                     <form action="/post_reply" method="post" style="width: 300px;margin-top: 20px;" id="reply-form">
                         <p><input type="hidden" name="thread_id" value="<%= thread['id'] %>"></p>
-                        <p><input type="text" name="name" placeholder="名前" class="form-input" value="匿名希望くん"></p>
-                        <p><textarea name="content" placeholder="本文" style="resize: none;" id="reply-form-textarea"
-                                tabindex="0"></textarea></p>
+                        <p><input type="text" name="name" placeholder="名前" class="form-input" value="匿名希望くん" maxlength="<%= ENV['NAME_MAX_LENGTH'] %>" required></p>
+                        <p><textarea name="content" placeholder="本文" style="resize: none;" id="reply-form-textarea" maxlength="<%= ENV['CONTENT_MAX_LENGTH'] %>" required></textarea></p>
                         <p><input type="submit" value="送信"></p>
                     </form>
                 </div>
@@ -70,7 +69,7 @@
                 behavior: 'smooth'
             })
             const textarea = document.getElementById('reply-form-textarea')
-            textarea.value = `>>${reply_number}`
+            textarea.value = `>>${reply_number}\n`
             textarea.focus()
         }
     </script>

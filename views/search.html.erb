@@ -14,12 +14,15 @@
                 <div class="thread">
                     <a href="/view?id=<%= h(thread['id']) %>" class="thread-link">
                         <div class="thread-content">
-                            <span class="thread-title">
+                            <p class="thread-title">
                                 <%= h(thread['title']) %>
-                            </span>
-                            <span class="thread-datetime">
+                                <span class="reply-sum">
+                                    (<%= thread['max_reply_number'] == 0 ? 1 : thread['max_reply_number'] %>)
+                                </span>
+                            </p>
+                            <p class="thread-datetime">
                                 <%= h(Time.parse(thread['datetime']).strftime('%Y/%m/%d %H:%M')) %>
-                            </span>
+                            </p>
                         </div>
                     </a>
                 </div>
