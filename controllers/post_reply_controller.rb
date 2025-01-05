@@ -24,7 +24,7 @@ class PostReplyServlet < WEBrick::HTTPServlet::AbstractServlet
 
             db = DB.new(ENV['SQLITE3_DATABASE_FILE'])
             # 指定されたthread_idのthreadが存在するか確認
-            thread_exist = (db.fetch_threads_by_id(id).length == 0) ? false : true
+            thread_exist = (db.fetch_threads_by_id(thread_id).length == 0) ? false : true
             if thread_exist
                 # 何番目のリプかを取得,計算
                 reply_number = db.fetch_max_reply_number(thread_id).to_i + 1
