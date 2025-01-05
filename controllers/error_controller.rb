@@ -1,5 +1,5 @@
 require 'webrick'
-require_relative './helpers/render_template'
+require_relative './helpers/render'
 require_relative './helpers/valid_request'
 
 class ErrorServlet < WEBrick::HTTPServlet::AbstractServlet
@@ -9,7 +9,7 @@ class ErrorServlet < WEBrick::HTTPServlet::AbstractServlet
             if type == 'empty' || type == 'db'
                 res.status = 200
                 res['Content-Type'] = 'text/html'
-                res.body = render_template('error', {
+                res.body = render('error', {
                     type: type,
                     error_message: {
                         'empty' => '空白の値が入っています',

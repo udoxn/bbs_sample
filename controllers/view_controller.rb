@@ -1,6 +1,6 @@
 require 'webrick'
 require_relative './database/db_connection'
-require_relative './helpers/render_template'
+require_relative './helpers/render'
 require_relative './helpers/escape_html'
 
 def replace_reply_links(text)
@@ -33,7 +33,7 @@ class ViewServlet < WEBrick::HTTPServlet::AbstractServlet
         else
             res.status = 200
             res['Content-Type'] = 'text/html'
-            res.body = render_template('view', {
+            res.body = render('view', {
                 thread: thread[0],
                 replys: replys
             })

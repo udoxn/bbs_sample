@@ -1,6 +1,6 @@
 require 'webrick'
 require_relative './database/db_connection'
-require_relative './helpers/render_template'
+require_relative './helpers/render'
 require_relative './helpers/escape_html'
 
 class IndexServlet < WEBrick::HTTPServlet::AbstractServlet
@@ -12,7 +12,7 @@ class IndexServlet < WEBrick::HTTPServlet::AbstractServlet
 
         res.status = 200
         res['Content-Type'] = 'text/html'
-        res.body = render_template('index', {
+        res.body = render('index', {
             threads: threads
         })
     end

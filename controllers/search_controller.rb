@@ -1,7 +1,7 @@
 require 'webrick'
 require_relative './database/db_connection'
 require_relative './helpers/escape_html'
-require_relative './helpers/render_template'
+require_relative './helpers/render'
 require_relative './helpers/valid_request'
 
 class SearchServlet < WEBrick::HTTPServlet::AbstractServlet
@@ -16,7 +16,7 @@ class SearchServlet < WEBrick::HTTPServlet::AbstractServlet
 
             res.status = 200
             res['Content-Type'] = 'text/html'
-            res.body = render_template('search', {
+            res.body = render('search', {
                 q: q,
                 threads: threads,
                 threads_length: threads_length
